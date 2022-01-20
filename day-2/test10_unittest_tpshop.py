@@ -24,9 +24,10 @@ class TPShopLogin(unittest.TestCase):
     # 登录成功
     def test01_login_success(self):
         #发送验证码请求并断言
-        # response = self.session.get(url=self.url_verify)
-        # self.assertEqual(200, response.status_code)
-        # self.assertIn("image", response.headers.get("Content-Type"))
+        response = self.session.get(url=self.url_verify)
+        print(response)
+        self.assertEqual(200, response.status_code)
+        self.assertIn("image", response.headers.get("Content-Type"))
 
         #发登录请求并断言
         login_data = {
@@ -37,7 +38,7 @@ class TPShopLogin(unittest.TestCase):
         response = self.session.post(url=self.url_login, data=login_data)
         print(response.json())
         self.assertEqual(200, response.status_code)
-        self.assertEqual(1, response.json().get("code"))
+        self.assertEqual(1, response.json().get("status"))
         self.assertIn("登陆成功", response.json().get("msg"))
 
     # 账号不存在
@@ -51,10 +52,10 @@ class TPShopLogin(unittest.TestCase):
         response = self.session.post(url=self.url_login, data=login_data)
         print(response.json())
         self.assertEqual(200, response.status_code)
-        self.assertEqual(0, response.json().get("code"))
+        self.assertEqual(-1, response.json().get("status"))
         self.assertIn("账号不存在", response.json().get("msg"))
 
-if __name__ == '__main__':
-   # 启动单元测试
-    unittest.main()
+# if __name__ == '__main__':
+#    # 启动单元测试
+#     unittest.main()
 
