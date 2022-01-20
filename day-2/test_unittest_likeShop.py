@@ -11,8 +11,7 @@ class LikeShopLogin(unittest.TestCase):
     def setUp(self):
         # 实例化session对象
         self.session = requests.Session()
-        # 定义验证接口url地址
-        self.url_verify = "http://tpshop.com/index.php?m=Home&c=User&a=verify"
+
         # 定义正如接口url地址
         self.url_login = "http://liketest.com/api/account/login"
 
